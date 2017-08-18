@@ -1,4 +1,23 @@
-
+<?php
+ session_start();
+ require_once('conn.php');
+ $database ="gbook";
+ $conn = new mysqli($servername,$username,$password,$database);
+ if(!empty($_POST['subject']))
+{
+	$subject = $_POST['subject'];
+    setcookie('subject',$subject,time()+3600);	
+}
+else if(empty($_POST['subject'])||!isset($_POST['subject']))
+{
+	$subject = $_COOKIE['subject'];
+}
+else
+{
+	echo "fault page";
+	exit;
+}
+?>
 
 <!DOCTYPE html>
 
@@ -64,42 +83,35 @@ body {
 <h2 style = "text-align:center">评论</h2>
  <p>&nbsp;</p>
   <p>&nbsp;</p>
+  <p>原作者：<?php 
+  $sql = "select * from gbook where subject = '$subject' and reply is NULL";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  echo $row['username'];
+  ?></p>
+  <p>原文标题：<?php echo $row['subject'];?></p>
+  <p>原文内容：<?php echo $row['content'];?></p>
+  
   
 <div class="table-content" style = "margin-left:100px"> 
-<table width="600" border="1px" cellspacing="0" cellpadding="0"> 
+<table width="450" border="1px" cellspacing="0" cellpadding="0"> 
 <tr> 
 <td width="100">用户</td> 
-<td width="150">主题</td> 
+
 <td width="250">评论</td> 
 <td width="100">时间</td>
 
 </tr> 
 <?php 
- session_start();
- require_once('conn.php');
- $database ="gbook";
- $conn = new mysqli($servername,$username,$password,$database);
-if(!empty($_POST['subject']))
-{
-	$subject = $_POST['subject'];
-    setcookie('subject',$subject,time()+3600);	
-}
-else if(empty($_POST['subject'])||!isset($_POST['subject']))
-{
-	$subject = $_COOKIE['subject'];
-}
-else
-{
-	echo "fault page";
-	exit;
-}
+
+
  $sql = "select * from gbook where subject ='$subject' and reply is not null";
  $result = $conn->query($sql);
  $row = $result->fetch_assoc();
 do { ?>
     <tr>
       <td><?php echo $row['username']; ?></td>
-      <td><?php echo $row['subject']; ?></td>
+   
       <td><?php echo $row['reply']; ?></td>
       <td><?php echo $row['redate']; ?></td>
     </tr>
@@ -163,7 +175,7 @@ do { ?>
 	 
 	  if(log_status == 1)
 	  {
-	    document.getElementById("login_user").innerHTML = "欢迎："+"<?php echo $_COOKIE['username'];?><br><form action =\"clear_cookie.php\" method =\"get\"><input type=\"submit\"  name = \"relogin\" value = 1\"重新登陆\"><input type = \"hidden\" name = \"relogin\" value = 2></form><br><br>";
+	    document.getElementById("login_user").innerHTML = "欢迎："+"<?php echo $_COOKIE['username'];?><br><form action =\"clear_cookie.php\" method =\"get\"><input type=\"submit\"  name = \"relogin\" value = \"重新登陆\"><input type = \"hidden\" name = \"relogin\" value = 2></form><br><br>";
 	  }
 	  </script>
  
