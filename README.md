@@ -24,3 +24,7 @@ admin.php:admin main page, it shows all guestbook and review in database,, admin
 register function there, admin user infomation should be added to database directly<br>
 login_admin.php:admin user login processing page<br>
 clear_cookie.php:clear cookie after logout<br>
+
+
+参考链接：http://blog.csdn.net/jordanhill27/article/details/77323421
+----------------------
