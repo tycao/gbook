@@ -28,3 +28,8 @@ clear_cookie.php:clear cookie after logout<br>
 
 参考链接：http://blog.csdn.net/jordanhill27/article/details/77323421
 ----------------------
+
+PHP个人博客大全-独立博客 : http://blog.sina.com.cn/s/blog_71ed1b870102vu7y.html
+-------------------------
+《PHP经典编程265例》书籍：https://baike.baidu.com/item/PHP%E7%BB%8F%E5%85%B8%E7%BC%96%E7%A8%8B265%E4%BE%8B/4239107?fr=aladdin
+-----------------
